@@ -11,11 +11,27 @@ html {
 }
 
 body {
+    background: url('../public/background.svg'), url('../public/background-blur.svg'), url('../public/background-blur2.svg');
+    background-size: auto auto, 80%, 80%;
+    background-repeat: repeat, no-repeat, no-repeat;
+    background-position: 0 0, left top, right top;
     background-color:var(--bg-color);
-    background: url('../public/background.svg');
     color: var(--additional-color);
 }
 
+.fade-in {
+  animation: fade-in 1s ease-in-out;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
 .burger-icon {
   width: 40px;
   height: 30px;
@@ -25,50 +41,39 @@ body {
   position: fixed;
   top: 15px;
   right: 15px;
-  z-index: 15;
+  z-index: 1500;
   cursor: pointer;
-  
+
   .burger-line {
     width: 100%;
     height: 4px;
     border-radius: 2px;
-    transition: transform 0.3s, opacity 0.3s, background-color 0.3s;
+    transition: transform 0.5s cubic-bezier(0.7, 0, 0.3, 1), opacity 0.5s cubic-bezier(0.7, 0, 0.3, 1), background-color 0.5s cubic-bezier(0.7, 0, 0.3, 1);
   }
-  
+
   &:hover {
     .burger-line {
       background-color: #ff5733;
     }
   }
-  
+
   &.open {
     .top-line {
-      transform: translateY(10px) rotate(45deg);
+      transform: translateY(13px) rotate(45deg);
     }
-  
+
     .middle-line {
       opacity: 0;
+      transition: opacity 0.5s cubic-bezier(0.7, 0, 0.3, 1) 0.1s;
+      box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
     }
-  
+
     .bottom-line {
-      transform: translateY(-10px) rotate(-45deg);
+      transform: translateY(-13px) rotate(-45deg);
     }
   }
 }
 
 .burger-line {
   background-image: linear-gradient(45deg, #ff5733, #ff7f50);
-}
-
-.fade-in-transition {
-  transition: opacity 1s ease-in-out;
-  opacity: 0;
-}
-
-.fade-in-transition.enter {
-  opacity: 1;
-}
-
-.fade-in-transition.exit {
-  opacity: 0;
 }

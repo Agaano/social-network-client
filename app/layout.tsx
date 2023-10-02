@@ -27,20 +27,21 @@ export default function RootLayout({
             <div className="burger-line middle-line"></div>
             <div className="burger-line bottom-line"></div>
           </div>
-          <TransitionGroup>
-          <CSSTransition
-            key="about"
-            appear={true}
-            enter={true}
-            leave={true}
-            timeout={1000}
-          >
           <Link  href = '/'  >
             <Logo />
           </Link>
+          <TransitionGroup>
+          <CSSTransition
+          key="about"
+          appear={true}
+          enter={true}
+          leave={true}
+          timeout={1000}
+          className="fade-in"
+        >
+          {children}
           </CSSTransition>
           </TransitionGroup>
-          {children}
         </body>
       </Provider>
     </html>
