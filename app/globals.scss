@@ -2,26 +2,62 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+html {
+  --bg-color: #161527;
+  --primary-color: #5a6794;
+  --secondary-color: #8794c0;
+  --link-color: #e7e9ee;
+  --additional-color: #d8cdb0;
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+    background-color:var(--bg-color);
+    background: url('../public/background.svg');
+    color: var(--additional-color);
 }
+
+.burger-icon {
+  width: 40px;
+  height: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  z-index: 15;
+  cursor: pointer;
+  
+  .burger-line {
+    width: 100%;
+    height: 4px;
+    border-radius: 2px;
+    transition: transform 0.3s, opacity 0.3s, background-color 0.3s;
+  }
+  
+  &:hover {
+    .burger-line {
+      background-color: #ff5733;
+    }
+  }
+  
+  &.open {
+    .top-line {
+      transform: translateY(10px) rotate(45deg);
+    }
+  
+    .middle-line {
+      opacity: 0;
+    }
+  
+    .bottom-line {
+      transform: translateY(-10px) rotate(-45deg);
+    }
+  }
+}
+
+.burger-line {
+  background-image: linear-gradient(45deg, #ff5733, #ff7f50);
+}
+
+  
