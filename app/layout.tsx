@@ -5,7 +5,6 @@ import store from '@/lib/store/store'
 import Link from 'next/link'
 import { useState } from 'react'
 import { Provider } from 'react-redux'
-import { CSSTransition, TransitionGroup } from "react-transition-group"
 import './globals.scss'
 
 export default function RootLayout({
@@ -30,18 +29,7 @@ export default function RootLayout({
           <Link  href = '/'  >
             <Logo />
           </Link>
-          <TransitionGroup>
-          <CSSTransition
-          key="about"
-          appear={true}
-          enter={true}
-          leave={true}
-          timeout={1000}
-          className="fade-in"
-        >
           {children}
-          </CSSTransition>
-          </TransitionGroup>
         </body>
       </Provider>
     </html>

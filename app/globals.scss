@@ -11,12 +11,27 @@ html {
 }
 
 body {
-    background: url('../public/background.svg'), url('../public/background-blur.svg'), url('../public/background-blur2.svg');
-    background-size: auto auto, 80%, 80%;
-    background-repeat: repeat, no-repeat, no-repeat;
+    background: url('../public/background.svg'), url('../public/background-blur.svg'), url('../public/background-blur2.svg'), url('../public/background.svg');
+    background-size: auto auto, 80%, 80%, 50% 50%;
+    background-repeat: repeat, no-repeat, no-repeat, repeat;
     background-position: 0 0, left top, right top;
     background-color:var(--bg-color);
     color: var(--additional-color);
+}
+
+.avatar {
+  max-width: 150px;
+  aspect-ratio:1/1;
+  object-fit: cover;
+  object-position: center center;
+  border-radius: 50%;
+  margin-bottom: 20px;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.7);
+}
+
+.avatar::before {
+  content:'';
+  border-bottom-radius:50%;
 }
 
 .fade-in {
@@ -48,7 +63,7 @@ body {
     width: 100%;
     height: 4px;
     border-radius: 2px;
-    transition: transform 0.5s cubic-bezier(0.7, 0, 0.3, 1), opacity 0.5s cubic-bezier(0.7, 0, 0.3, 1), background-color 0.5s cubic-bezier(0.7, 0, 0.3, 1);
+    transition: transform 0.5s cubic-bezier(0.7, 0, 0.3, 1), width 0.5s cubic-bezier(0.7, 0, 0.3, 1), opacity 0.5s cubic-bezier(0.7, 0, 0.3, 1), background-color 0.5s cubic-bezier(0.7, 0, 0.3, 1);
   }
 
   &:hover {
@@ -64,7 +79,8 @@ body {
 
     .middle-line {
       opacity: 0;
-      transition: opacity 0.5s cubic-bezier(0.7, 0, 0.3, 1) 0.1s;
+      width: 0%;
+      transition: width 0.4s cubic-bezier(0.7, 0, 0.3, 1), opacity 0.4s ease-in;
       box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
     }
 
@@ -73,7 +89,23 @@ body {
     }
   }
 }
-
 .burger-line {
-  background-image: linear-gradient(45deg, #ff5733, #ff7f50);
+  background-image: linear-gradient(45deg, #3443fe, #7f53b6);
 }
+.welcome_message {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  transition: opacity 0.5s;
+  font-size: 24px;
+  font-weight: bold;
+  color: #5a6794;
+}
+

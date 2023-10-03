@@ -28,8 +28,11 @@ const LoginForm = () => {
         router.push('/');
       }
     }).catch((err) => {
-      if (err.response.status < 500) setMessage('Неправильное имя пользователя или пароль');
-      else setMessage('Произошла ошибка... Повторите попытку позже')
+      if (err.response?.status < 500) setMessage('Неправильное имя пользователя или пароль');
+      else  {
+        setMessage('Произошла ошибка... Повторите попытку позже')
+        console.log(err);
+      }
     })
     setEmail('');
     setPassword('');
