@@ -1,10 +1,9 @@
 'use client';
-import { login } from '@/lib/store/authSlice'
-import axios from 'axios'
-import Cookies from 'js-cookie'
+import validateToken from '@/lib/auth/validateToken'
+import { IUser, login } from '@/lib/store/authSlice'
 import { useRouter } from 'next/navigation'
 import React, { useEffect, useState } from "react"
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 export default function RootLayout({
   children,
@@ -15,37 +14,33 @@ export default function RootLayout({
 	const dispatch = useDispatch();
 	const router = useRouter();
 	const [textOpacity, setTextOpacity] = useState(0);
-
+	const [alreadyValidated, setAlreadyValidated] = useState(false);
+	const {refresh} = useSelector((state:any) => state.auth);
+	
 	useEffect(() => {
 		setTextOpacity(1); 
-
-		const handler = async () => {
-			const token = Cookies.get('_tka');
-			if (!token) return;
-
-			axios.post(`${serverUrl}/auth/validate`, { token })
-				.then((response) => {
-					const { token, user } = response.data;
-					Cookies.set('_tka', token);
-					dispatch(login({ ...user }));
-				})
-				.catch((err) => {
-					console.log(err);
-					router.push('/auth');
-				});
-		}
-
-		handler();
-
-
 		const hideTextTimeout = setTimeout(() => {
 			setTextOpacity(0);
 		}, 2000);
-
+		
 		return () => {
 			clearTimeout(hideTextTimeout); 
 		};
 	}, []);
+
+	useEffect(() => {
+		const handler = async () => {
+			const user: undefined | IUser = await validateToken();
+			if (!user) {
+				router.push('/auth');
+				return;
+			}
+			dispatch(login(user));
+		}
+
+		handler();
+
+	}, [refresh])
 
 	return (
 		<div>

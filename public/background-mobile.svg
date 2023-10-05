@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800">
+    <g stroke="transparent" fill="#00BFFF">
+    <polygon points="647 105 645.5 107.6 648.5 107.6" opacity=".79">
+      <animate attributeName="opacity" values="0;1;0" dur="3s" begin="0s" repeatCount="indefinite"/>
+    </polygon>
+    <polygon points="204 719 202.5 721.6 205.5 721.6" opacity=".84">
+      <animate attributeName="opacity" values="0;1;0" dur="2s" begin="1s" repeatCount="indefinite"/>
+    </polygon>
+    <polygon points="176 282 174.5 284.6 177.5 284.6" opacity=".33">  
+      <animate attributeName="opacity" values="0;1;0" dur="2.5s" begin="0.5s" repeatCount="indefinite"/>
+    </polygon>
+    </g>
+   <g stroke="transparent" fill="#ffffff">
+    <polygon points="109 93 107.5 95.6 110.5 95.6" opacity=".26">
+      <animate attributeName="opacity" values="0;1;0" dur="2.2s" begin="1.7s" repeatCount="indefinite"/>
+    </polygon>
+    <polygon points="191 543 189.5 545.6 192.5 545.6" opacity=".93">
+      <animate attributeName="opacity" values="0;1;0" dur="2.8s" begin="1.2s" repeatCount="indefinite"/>
+    </polygon>
+    <polygon points="300 400 298.5 402.6 301.5 402.6" opacity=".6">
+      <animate attributeName="opacity" values="0;1;0" dur="2.2s" begin="0.3s" repeatCount="indefinite"/>
+    </polygon>
+    </g>
+    <g stroke="transparent" fill="#ffff00">
+    <polygon points="500 250 498.5 252.6 501.5 252.6" opacity=".7">
+      <animate attributeName="opacity" values="0;1;0" dur="2.5s" begin="0.7s" repeatCount="indefinite"/>
+    </polygon>
+    <polygon points="700 600 698.5 602.6 701.5 602.6" opacity=".5">
+      <animate attributeName="opacity" values="0;1;0" dur="2.8s" begin="0.5s" repeatCount="indefinite"/>
+    </polygon>
+  </g>
+</svg>

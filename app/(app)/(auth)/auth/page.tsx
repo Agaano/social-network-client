@@ -1,6 +1,7 @@
 'use client';
 
 // import { login } from '@/lib/store/authSlice'
+import { refresh } from '@/lib/store/authSlice'
 import axios from 'axios'
 import cookies from 'js-cookie'
 import Link from 'next/link'
@@ -23,8 +24,9 @@ const LoginForm = () => {
       const {data} = response;
       if (!data.token) {
         router.push(`/confirm?id=${data.id}&email=${data.email}`);
-      } else if (!!data.token) {
+      } else {
         cookies.set('_tka', data.token, {expires: 1});
+        dispatch(refresh());
         router.push('/');
       }
     }).catch((err) => {

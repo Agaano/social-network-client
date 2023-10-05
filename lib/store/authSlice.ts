@@ -1,32 +1,38 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
+import Cookies from 'js-cookie'
 
-interface IUser {
+export interface IUser {
   email: string,
   username: string,
+  avatar: string,
   service: object,
 }
 
-const initialState : {isAuthenticated: boolean, user: IUser | null} = {
+const initialState : {isAuthenticated: boolean, user: IUser | null, refresh: boolean} = {
   isAuthenticated: false,
-  user: null
+  user: null,
+  refresh: false,
 } 
+
 
 const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
     login: (state, action:PayloadAction<any>) => {
-      // Ваша логика для обработки успешного входа пользователя
       state.isAuthenticated = true;
       state.user = action.payload;
     },
     logout: (state) => {
-      // Ваша логика для обработки выхода пользователя
+      Cookies.remove('_tka');
       state.isAuthenticated = false;
       state.user = null;
     },
+    refresh: (state) => {
+      state.refresh = !state.refresh;
+    }
   },
 });
 
-export const { login, logout } = authSlice.actions;
+export const { login, logout, refresh } = authSlice.actions;
 export default authSlice.reducer;

@@ -12,11 +12,36 @@ html {
 
 body {
     background: url('../public/background.svg'), url('../public/background-blur.svg'), url('../public/background-blur2.svg'), url('../public/background.svg');
-    background-size: auto auto, 80%, 80%, 50% 50%;
+    background-size: 40%, 80%, 80%, 50% 50%;
     background-repeat: repeat, no-repeat, no-repeat, repeat;
     background-position: 0 0, left top, right top;
     background-color:var(--bg-color);
     color: var(--additional-color);
+
+    &.simple {
+      background: url('../public/background-simple.png'), url('../public/background-blur-simple.png'), url('../public/background-blur2-simple.png'), url('../public/background-simple.png');
+      background-size: 40%, 80%, 80%, 50% 50%;
+      background-repeat: repeat, no-repeat, no-repeat, repeat;
+      background-position: 0 0, left top, right top;
+      background-color: var(--bg-color);
+    }
+}
+
+@media (max-width: 786px) {
+  body {
+    background: url('../public/background.svg'), url('../public/background-blur.svg'), url('../public/background-blur2.svg'), url('../public/background.svg');
+    background-size: 100%, 300%, 300%, 50%;
+    background-repeat: repeat, no-repeat, no-repeat, repeat;
+    background-position: 0 0, center 80%, center 20%, 0 0;
+    background-color:var(--bg-color);
+    &.simple {
+      background: url('../public/background-simple.png'), url('../public/background-blur-simple.png'), url('../public/background-blur2-simple.png'), url('../public/background-simple.png');
+      background-size: 100%, 300%, 300%, 50%;
+      background-repeat: repeat, no-repeat, no-repeat, repeat;
+      background-color: var(--bg-color);
+      background-position: 0 0, center 80%, center 20%, 0 0;
+    } 
+  }
 }
 
 .avatar {

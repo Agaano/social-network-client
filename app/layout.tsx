@@ -26,7 +26,7 @@ export default function RootLayout({
             <div className="burger-line middle-line"></div>
             <div className="burger-line bottom-line"></div>
           </div>
-          <Link  href = '/'  >
+          <Link style = {{width: 'fit-content', display: 'block'}} href = '/'  >
             <Logo />
           </Link>
           {children}

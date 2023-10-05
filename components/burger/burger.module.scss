@@ -11,7 +11,27 @@
 	transition: opacity 0.5s ease, visibility 0.5s ease;
 
 	.profile {
-		text-align: center;	
+		padding-bottom: 30px;
+		margin-bottom: 15px;
+		border-bottom: 1px solid;
+		border-image: linear-gradient(90deg, rgba(28,28,28,0) 0%, rgba(255,255,255,1) 50%, rgba(0,0,0,0) 100%) 1;
+		display: flex;
+		justify-content: center;
+		align-items: flex-start;
+		column-gap: 10px;
+		height: 15%;
+		.data {
+			display: flex;
+			flex-direction: column;
+			justify-content: space-evenly;
+			height: 100%;
+		}
+
+		img {
+			height: 100%;
+			margin-bottom: 0;
+		}
+
 	}
   
 	nav.sidebar {
@@ -37,14 +57,7 @@
 		  cursor: pointer;
 		  display: flex;
 		  align-items: center;
-  
-		  &:before {
-			content: "\f0c9";
-			font-family: FontAwesome;
-			margin-right: 10px;
-			font-size: 24px;
-			transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-		  }
+			column-gap: 15px;
   
 		  &:hover {
 			transform: translateX(10px);
@@ -60,7 +73,8 @@
 		transform: translateX(0);
 	  }
 	}
-  }
+	
+}
   
   @media (max-width: 786px) {
 	.burger {
