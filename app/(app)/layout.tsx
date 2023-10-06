@@ -14,10 +14,10 @@ export default function RootLayout({
 	const dispatch = useDispatch();
 	const router = useRouter();
 	const [textOpacity, setTextOpacity] = useState(0);
-	const [alreadyValidated, setAlreadyValidated] = useState(false);
 	const {refresh} = useSelector((state:any) => state.auth);
 	
 	useEffect(() => {
+		
 		setTextOpacity(1); 
 		const hideTextTimeout = setTimeout(() => {
 			setTextOpacity(0);
@@ -27,6 +27,8 @@ export default function RootLayout({
 			clearTimeout(hideTextTimeout); 
 		};
 	}, []);
+
+	
 
 	useEffect(() => {
 		const handler = async () => {
@@ -39,9 +41,8 @@ export default function RootLayout({
 		}
 
 		handler();
-
 	}, [refresh])
-
+	
 	return (
 		<div>
 			<h1 className ='welcome_message' style={{ opacity: textOpacity, transition: 'opacity 0.5s' }}> 

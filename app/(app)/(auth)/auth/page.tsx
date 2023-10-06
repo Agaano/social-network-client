@@ -20,7 +20,7 @@ const LoginForm = () => {
   const handleSubmit = async (e:any) => {
     e.preventDefault();
 
-		axios.post('http://localhost:8000/auth/signin', {id: email, password}).then((response) => {
+		axios.post(process.env.NEXT_PUBLIC_SERVER_URL + '/auth/signin', {id: email, password}).then((response) => {
       const {data} = response;
       if (!data.token) {
         router.push(`/confirm?id=${data.id}&email=${data.email}`);

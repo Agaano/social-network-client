@@ -6,6 +6,7 @@ import { IconContext } from 'react-icons'
 import { BsUpload } from 'react-icons/bs'
 import Modal from 'react-modal'
 import { useDispatch } from 'react-redux'
+import Button from '../ui/button'
 import styles from './profile.module.scss'
 
 export default ({
@@ -74,7 +75,7 @@ export default ({
 		overlayClassName={styles.modal_overlay} 
 		onRequestClose={() => onRequestClose()}
 	  >
-		<form onSubmit={handleSubmit}>
+		<form>
 		  <h1>Загрузите фото профиля</h1>
 		  <p className={styles.error}>{message}</p>
 			{file && <h2>Предпросмотр:</h2>}
@@ -98,9 +99,9 @@ export default ({
 			onChange={handleUpload}
 			style={{display: 'none'}}
 		  />
-			<button type = 'submit'>
+			<Button onClick = {handleSubmit}>
 				Загрузить
-			</button>
+			</Button>
 		</form>
 	  </Modal>
 		)

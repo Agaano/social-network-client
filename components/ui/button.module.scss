@@ -1,0 +1,17 @@
+.button {
+	position: relative;
+	padding-inline: 25px;
+	padding-block: 10px;
+	background: var(--primary-button);
+	border-radius: 15px;
+	&::before {
+		content: '';
+		position: absolute;
+		inset: -10px;
+		border-radius: 15px;
+		background: url('../../public/background-blur.svg');
+		filter: blur(25px);
+		background-size: 1000%;
+		background-position: -500% -500%;
+	}
+}

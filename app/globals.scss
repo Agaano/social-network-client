@@ -8,6 +8,8 @@ html {
   --secondary-color: #8794c0;
   --link-color: #e7e9ee;
   --additional-color: #d8cdb0;
+  --primary-button:linear-gradient(90deg, rgba(28,28,28,1) 0%, rgba(71,52,227,1) 0%, rgba(151,94,219,1) 100%);
+  --secondary-button: linear-gradient(90deg, rgba(28,28,28,1) 0%, rgba(22,8,133,1) 29%, rgba(65,4,108,1) 51%, rgba(83,1,97,1) 74%, rgba(0,0,0,1) 100%);
 }
 
 body {
@@ -134,3 +136,28 @@ body {
   color: #5a6794;
 }
 
+.progress {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  height: 2px;
+  background-color: #ddd;
+  border-radius: 4px;
+}
+
+.progress-bar {
+  background-color: #ff0000;
+  height: 100%;
+  color: white;
+  font-size: 14px;
+  line-height: 30px;
+  text-align: center;
+  border-radius: 4px;
+}
+
+.progress-bar-text {
+  font-size: 12px;
+  line-height: 20px;
+  margin-left: 5px;
+}

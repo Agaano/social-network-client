@@ -21,6 +21,9 @@ const authSlice = createSlice({
   reducers: {
     login: (state, action:PayloadAction<any>) => {
       state.isAuthenticated = true;
+      if (!!action.payload.avatar) {
+        action.payload.avatar = process.env.NEXT_PUBLIC_SERVER_URL + action.payload.avatar;
+      }
       state.user = action.payload;
     },
     logout: (state) => {

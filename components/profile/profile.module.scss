@@ -71,20 +71,6 @@
   input[type="file"] {
     display: none;
   }
-  button {
-    background-color: #555;
-    color: #fff;
-    padding: 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    display: block;
-    margin: 0 auto;
-    margin-top: 10px;
-  }
-  
-  button:hover {
-    background-color: #666;
-  }
   
   body {
     background-color: #000;
@@ -108,17 +94,43 @@
     color: red;
     text-shadow: 0 0 10px #333;
   }
+}
+.createPost {
+  background-color: #fff;
+  padding: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 16px;
+
+  h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+
+  input[type='text'],
+  textarea {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
 
   button {
-    background-color: #555;
+    background-color: #007bff;
     color: #fff;
-    border: 1px solid #fff;
-    &:hover {
-      background-color: #666;
-      border-color: #fff;
-    } 
+    border: none;
+    border-radius: 4px;
+    padding: 8px 16px;
+    cursor: pointer;
   }
 }
+
 @media screen and (max-width: 576px) {
   .modalcontent {
     width: 300px;

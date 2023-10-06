@@ -11,12 +11,50 @@ import { useDispatch, useSelector } from 'react-redux'
 import styles from "./profile.module.scss"
 
 const ProfilePage = () => {
+  const posts = [
+    {
+      title: 'Новый релиз JavaScript 2024',
+      text: `Сегодня состоялся релиз новой версии JavaScript 2024. В этой версии были добавлены новые функции и улучшения, в том числе:
+
+        * Поддержка шаблонов с переменными
+        * Новые методы для работы с объектами
+        * Улучшенная поддержка асинхронного программирования
+
+    Для получения дополнительной информации посетите официальный сайт JavaScript.`,
+      date: '6 сентября 19:54',
+      likes: 100,
+      dislikes: 10
+    }
+  ]
   const router = useRouter();
   const {user} = useSelector((state:any) => state.auth);
   const [modalOpen, setModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-
+  
   const dispatch = useDispatch();
+
+  const [newPost, setNewPost] = useState({
+    title: '',
+    text: '',
+  });
+  
+  const handleSubmitPost = () => {
+
+    const createdPost = {
+      title: newPost.title,
+      text: newPost.text,
+      date: new Date().toLocaleString(), 
+      likes: 0,
+      dislikes: 0,
+    };
+  
+    const handleInputChange = (e:any) => {
+      const { name, value } = e.target;
+      setNewPost({
+        ...newPost,
+        [name]: value,
+      });
+    };
 
   const reloadPage = () => {
     router.push('/');
@@ -38,7 +76,7 @@ const ProfilePage = () => {
   } 
 
   return (
-  <>
+  <main>
       <Head>
       <title>Профиль</title>
       </Head>
@@ -121,8 +159,43 @@ const ProfilePage = () => {
         </div>
       )}
       <ModalAvatar isOpen = {modalOpen} userId = {user.id} reloadPage={reloadPage} onRequestClose={() => {setModalOpen(false)}}/>
-    </>
+      <div className = {styles.wall}>
+        <form className={styles.createPost} onSubmit={handleSubmitPost}>
+          <h2>Create a New Post</h2>
+          <input
+            type="text"
+            name="title"
+            placeholder="Title"
+            value={newPost.title}
+            onChange={handleInputChange}
+          />
+          <textarea
+            name="text"
+            placeholder="Write your post..."
+            value={newPost.text}
+            onChange={handleInputChange}
+          />
+          <button type='submit'>Post</button>
+        </form>
+          <ul>
+            {posts.map((post) => {
+              return (
+                <li>
+                  <div className={styles.profile_block}>
+                    <img className='avatar' src = {!user.avatar ? 'no_avatar.png' : user.avatar}/>
+                    <h3>{user.username}</h3>
+                  </div>
+                  <h2>{post.title}</h2>
+                  <p>{post.text}</p>
+                  <time>{post.date}</time>
+                </li>
+              )
+            })}
+          </ul>
+      </div>
+    </main>
   );
 };
+}
 
 export default ProfilePage;
