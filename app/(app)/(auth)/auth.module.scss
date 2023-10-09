@@ -99,6 +99,7 @@
       }
     }
   
+
     button {
       background-color: var(--primary-color);
       color: #fff;
@@ -113,4 +114,11 @@
       }
     }
   }
+ @media (max-width: 786px) {
+  .registration_form {
+    background: linear-gradient(90deg, #1e1e1e, #121212);
+    opacity: 1;
+    backdrop-filter: none;
+    box-shadow: none
+  }}
   

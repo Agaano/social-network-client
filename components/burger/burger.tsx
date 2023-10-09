@@ -15,6 +15,7 @@ export default ({open, setIsOpen} : {open: boolean, setIsOpen:any}) => {
 	const state = useSelector((state:any)=>state.auth)
 	const [simpleMode, setSimpleMode] = useState(Cookies.get('_sm') === 'true' ? true : false);
 	const sidebarRef = useRef(null);
+	const serverUrl = process.env.NEXT_PUBLIC_SERVER_URL;
 	const handleClick = (e:any) => {
 		//@ts-ignore
 		if (!sidebarRef.current.contains(e.target)) {
@@ -23,6 +24,7 @@ export default ({open, setIsOpen} : {open: boolean, setIsOpen:any}) => {
 	}
 
 	useEffect(() => {
+		console.log('switched to ' + simpleMode)
 		Cookies.set('_sm',simpleMode.toString());
 		const body = document?.body;
 		if (simpleMode) {
@@ -34,7 +36,7 @@ export default ({open, setIsOpen} : {open: boolean, setIsOpen:any}) => {
 		<aside className = {`${style.burger} ${open && style.active}`} onClick ={handleClick}>
 			<nav className= {style.sidebar} ref = {sidebarRef}>
 			{state.isAuthenticated && <Link href='/profile'><div className={style.profile}>
-				<img className = 'avatar' src = {state.user?.avatar || 'no_avatar.png'}/>
+				<img className = 'avatar' src = {serverUrl + state.user?.avatar || 'no_avatar.png'}/>
 				<div className = {style.data}>
 					<p>{state.user.username}</p>
 					<p>{state.user.email}</p>

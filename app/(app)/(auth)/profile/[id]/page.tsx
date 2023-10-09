@@ -1,16 +1,46 @@
+'use client';
+
+import Post from '@/components/post/post'
 import axios from 'axios'
+import { useEffect, useState } from 'react'
 import { FaGithub, FaGlobe, FaLinkedin } from "react-icons/fa"
 import styles from '../profile.module.scss'
 type Props = {
 	params: {id : string}
 }
 
-export default async ({params: {id}}: Props) => {
-	const serverUrl = process.env.SERVER_URL;
-	const response = await axios.get(`${serverUrl}/user/${id}`);
-	const user = response.data;
+export default ({params: {id}}: Props) => {
+	const serverUrl = process.env.NEXT_PUBLIC_SERVER_URL;
+  const [thisUser, setThisUser] = useState<any>({});
+  const [thisPosts, setThisPosts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [isFriend, setIsFriend] = useState(false);
 
-	if (!user.service?.confirmed) {
+  useEffect(() => {
+    const handler = async () => {
+      const response = await axios.get(`${serverUrl}/user/${id}`);
+      console.log(response.data);
+      if (response.status >= 200 && response.status < 400) {
+        setThisUser(response.data);
+        setLoading(false);
+      }
+      const postsResponse = await axios.get(`${serverUrl}/posts/${response.data.id}`);
+      if (postsResponse.status >= 200 && postsResponse.status < 400) {
+        setThisPosts(postsResponse.data);
+      }
+    }
+    handler();
+  }, [])
+
+  const handleAddFriend = async () => {
+    
+  }
+
+  if (loading) {
+    return <>Загрузка...</>
+  }
+
+	if (!thisUser.service?.confirmed) {
 		return <p>Такого пользователя не существует</p>
 	}
 
@@ -19,32 +49,32 @@ export default async ({params: {id}}: Props) => {
     <div className={styles.profile}>
       <div className={styles.profileHeader}>
         <img
-          src={process.env.NEXT_PUBLIC_SERVER_URL + user.avatar || 'no_avatar.png'}
-          alt={user.username}
+          src={process.env.NEXT_PUBLIC_SERVER_URL + thisUser.avatar || 'no_avatar.png'}
+          alt={thisUser.username}
           className='avatar'
         />
         <div className={styles.headerText}>
           <h1
             className={styles.name}
           >
-            {user.username}
+            {thisUser.username}
           </h1>
           <p
             className={styles.position}
           >
-            {user.email}
+            {thisUser.email}
           </p>
         </div>
       </div>
       <p
         className={styles.bio}
       >
-        {user.bio}
+        {thisUser.bio}
       </p>
       <div className={styles.links}>
-        {user.service?.github && 
+        {thisUser.service?.github && 
           <a
-            href={user.service.github}
+            href={thisUser.service.github}
             className={styles.link}
             target="_blank"
             rel="noopener noreferrer"
@@ -54,9 +84,9 @@ export default async ({params: {id}}: Props) => {
           </a>
         }
         {
-          user.service?.linkedin && 
+          thisUser.service?.linkedin && 
           <a
-            href={user.service.linkedin}
+            href={thisUser.service.linkedin}
             className={styles.link}
             target="_blank"
             rel="noopener noreferrer"
@@ -66,9 +96,9 @@ export default async ({params: {id}}: Props) => {
           </a>
         }
         {
-          user.service?.website && 
+          thisUser.service?.website && 
           <a
-            href={user.website}
+            href={thisUser.website}
             className={styles.link}
             target="_blank"
             rel="noopener noreferrer"
@@ -77,10 +107,19 @@ export default async ({params: {id}}: Props) => {
             Website
           </a>
         }
+        <div>
+          <button onClick = {handleAddFriend}>Добавить в друзья</button>
+        </div>
       </div>
     </div>
     <div className = {styles.wall}>
-        
+      <ul>
+        {thisPosts.length > 0 && [...thisPosts].reverse().map((post) => {
+          return (
+            <Post hasDelete author = {thisUser} post = {post} RefreshPosts={null}/>
+          )
+        })}
+      </ul>
     </div>
   </main>
   )

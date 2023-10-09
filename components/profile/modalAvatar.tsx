@@ -1,6 +1,7 @@
 'use client'
 import { refresh } from '@/lib/store/authSlice'
 import axios from 'axios'
+import Cookies from 'js-cookie'
 import { useEffect, useState } from 'react'
 import { IconContext } from 'react-icons'
 import { BsUpload } from 'react-icons/bs'
@@ -11,12 +12,10 @@ import styles from './profile.module.scss'
 
 export default ({
   isOpen,
-  userId,
   onRequestClose,
   reloadPage
 }: {
   isOpen: any;
-  userId: string;
   onRequestClose: any;
   reloadPage: any;
 }) => {
@@ -55,8 +54,12 @@ export default ({
 		if (!!file) {
 			setLoading(true);
 			const data = new FormData();
+			const token = Cookies.get('_tka')
+			if (!token) {
+				return;
+			}
 			data.append('file', file); 
-			data.append('id', userId);
+			data.append('token', token);
 			const response = await axios.post(`${serverUrl}/profile/upload/photo`, data); 
 			dispatch(refresh());
 			console.log(response.status);
@@ -99,9 +102,11 @@ export default ({
 			onChange={handleUpload}
 			style={{display: 'none'}}
 		  />
-			<Button onClick = {handleSubmit}>
-				Загрузить
-			</Button>
+			<div className='flex w-full justify-center my-2'>
+				<Button onClick = {handleSubmit}>
+					Загрузить
+				</Button>
+			</div>
 		</form>
 	  </Modal>
 		)

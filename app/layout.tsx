@@ -49,7 +49,7 @@ export default function RootLayout({
       </div>
     </div> */}
     <Provider store={store}>
-      <body>
+      <body className='simple'>
         <Burger open={burgerOpen} setIsOpen={setBurgerOpen} />
         <div className={`burger-icon ${burgerOpen && 'open'}`} onClick={(e) => setBurgerOpen((prev) => !prev)}>
           <div className="burger-line top-line"></div>

@@ -45,7 +45,7 @@ export default function RootLayout({
 	
 	return (
 		<div>
-			<h1 className ='welcome_message' style={{ opacity: textOpacity, transition: 'opacity 0.5s' }}> 
+			<h1 className ='welcome_message' style={{ opacity: textOpacity, transition: 'opacity 0.5s', display: textOpacity > 0 ? 'block' : 'none'}}> 
 				Добро пожаловать на <span style={{color:'blue'}}>EtruxS</span>!
 			</h1>
 			{children}

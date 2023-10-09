@@ -1,5 +1,109 @@
 
+@keyframes slide-out {
+  0% {
+    opacity: 0;
+    transform: translateY(-5%);
+  }
+
+  100% {
+    opacity:1;
+    transform: translateY(0%);
+  }
+
+}
+
+@keyframes fade-out {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.settings, .friendslist {
+  background: linear-gradient(90deg, #1e1e1e, #121212);
+  color: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.6);
+  max-width: 800px;
+  margin: 0 auto;
+  margin-bottom: 0;
+  text-align: center;
+  padding: 0;
+  height: 0;
+  opacity: 0;
+  transition: padding 0.25s ease-in, margin-bottom 0.25s ease-out, height 0.25s ease-in, opacity 0.25s ease-in;
+  &.open {
+    margin-bottom: 15px;
+    opacity: 1;
+    padding: 30px;
+    height: 300px;
+    transition: padding 0.25s ease-out, margin-bottom 0.25s ease-out, height 0.25s ease-out, opacity 0.25s ease-out;
+  }
+}
+
+.friendslist {
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+
+  &.open {
+    .refresh_button {
+      display: block;
+    }
+  }
+
+  .refresh_button {
+    display: none;
+    position: absolute;
+    top: 25px;
+    right: 50%;
+    transform: translateX(50%);
+  }
+
+  ul {
+    width: 50%;
+    height: 100%;
+
+    h2 {
+      margin-bottom: 10px;
+    }
+
+    li {
+      margin-left: 15px;
+      margin-top: 5px;
+      display: flex;
+      column-gap: 5px;
+      justify-content: flex-start;
+      align-items: center;
+      .friend_profile {
+        display: flex;
+        align-items: center;
+        height: 100%;
+        cursor: pointer;
+        column-gap: 10px;
+      }
+      .buttons {
+        height: 1005;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        column-gap: 10px;
+        margin-left: auto;
+      }
+      img {
+        width: 30px;
+        margin: 0;
+      }
+    }
+  }
+}
+
 .modal_overlay {
+  animation: fade-out 0.25s ease-in;
   background-color: rgba(0, 0, 0, 0.5);
   position: fixed;
   top: 0;
@@ -11,6 +115,7 @@
   align-items: center;
 
   .modalcontent {
+    animation: slide-out 0.25s ease-in;
     background-color: #222;
     color: #fff;
     border-radius: 10px;
@@ -61,7 +166,6 @@
       width: 100%;
       padding-block: 25px;
       padding: 15px;
-      border: 1px dashed white;
     }
     > img {
       padding: 15px;
