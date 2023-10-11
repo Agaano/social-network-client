@@ -36,9 +36,9 @@ export default ({params: {id}}: Props) => {
     
   }
 
-  if (loading) {
-    return <>Загрузка...</>
-  }
+  // if (loading) {
+  //   return <ProgressBar/>
+  // }
 
 	if (!thisUser.service?.confirmed) {
 		return <p>Такого пользователя не существует</p>
@@ -116,7 +116,7 @@ export default ({params: {id}}: Props) => {
       <ul>
         {thisPosts.length > 0 && [...thisPosts].reverse().map((post) => {
           return (
-            <Post hasDelete author = {thisUser} post = {post} RefreshPosts={null}/>
+            <Post hasDelete = {false} author = {thisUser} post = {post} RefreshPosts={null}/>
           )
         })}
       </ul>

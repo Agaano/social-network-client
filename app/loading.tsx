@@ -1,8 +1,5 @@
 import ProgressBar from '@/components/ProgressBar'
 
-const Loading = () => {
-    return <ProgressBar/>;
-};
-
-export default Loading;
-
+export default function Loading() {
+    return <ProgressBar/>
+  }

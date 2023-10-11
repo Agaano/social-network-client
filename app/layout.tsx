@@ -15,39 +15,9 @@ export default function RootLayout({
 
   
   const [burgerOpen, setBurgerOpen] = useState(false);
-  // const [progress, setProgress] = useState(0);
-
-  //   useEffect(() => {
-  //   const handleWindowLoad = () => {
-  //     setProgress(100);
-  //   };
-
-  //   window.addEventListener('DOMContentLoaded', handleWindowLoad);
-
-  //   return () => {
-  //     window.removeEventListener('DOMContentLoaded', handleWindowLoad);
-  //   };
-  // }, []);
-  // useLayoutEffect(() => {
-	// 	const interval = setInterval(() => {handleProgress()}, 50)
-	// 	const handleProgress = () => {
-	// 		setProgress(prev => prev + 0.1);
-	// 	};
-		
-	
-	// 	return () => {
-	// 		setProgress(0);
-	// 		clearInterval(interval);
-	// 	};
-	// }, [])
-  
   
   return (
     <html lang="en">
-    {/* <div className="progress">
-      <div className="progress-bar" role="progressbar" style={{ width: `${progress}%` }}>
-      </div>
-    </div> */}
     <Provider store={store}>
       <body className='simple'>
         <Burger open={burgerOpen} setIsOpen={setBurgerOpen} />

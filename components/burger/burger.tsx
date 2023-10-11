@@ -31,7 +31,7 @@ export default ({open, setIsOpen} : {open: boolean, setIsOpen:any}) => {
 			body.className = 'simple'
 		} else body.className = ''
 	}, [simpleMode])
-	
+
 	return (
 		<aside className = {`${style.burger} ${open && style.active}`} onClick ={handleClick}>
 			<nav className= {style.sidebar} ref = {sidebarRef}>
@@ -45,7 +45,7 @@ export default ({open, setIsOpen} : {open: boolean, setIsOpen:any}) => {
 				<ul>
 					<li><IoHome/> <Link href = '/'>На главную</Link></li>
 					{state.isAuthenticated ? <li><BsFillPersonFill/><Link href='/profile'>Профиль</Link></li> : <li><GoSignIn/><Link href ='/auth'>Вход</Link></li>}
-					<li><BiSolidMessage/>Чаты</li>
+					<li><BiSolidMessage/><Link href = '/messanger'>Чаты</Link></li>
 					<li><Switch value = {simpleMode} setValue={(e:any) => setSimpleMode(e)}/> Простой режим</li>
 				</ul>
 			</nav>

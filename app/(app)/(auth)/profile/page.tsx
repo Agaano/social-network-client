@@ -3,12 +3,10 @@ import Post from '@/components/post/post'
 import FriendsList from '@/components/profile/friendsList'
 import ModalAvatar from '@/components/profile/modalAvatar'
 import Settings from '@/components/profile/settings'
-import Logo from '@/components/svg/logo'
 import { logout, refresh } from '@/lib/store/authSlice'
 import axios from 'axios'
 import { motion } from "framer-motion"
 import Cookies from 'js-cookie'
-import Head from "next/head"
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from "react"
 import { IconContext } from 'react-icons'
@@ -107,15 +105,12 @@ const ProfilePage = () => {
 
   if (!user) {
       return <div className = 'flex fixed w-full h-full justify-center align-baseline'>
-          <Logo/>
+
         </div>
   } 
 
   return (
   <main>
-      <Head>
-      <title>Профиль</title>
-      </Head>
       {isLoading ? (
         <div className={styles.loading}>Загрузка...</div>
       ) : (
@@ -226,7 +221,7 @@ const ProfilePage = () => {
             })}}
           />
           <InputEmoji
-            keepOpened={true}
+            keepOpened
             borderRadius={5}
             language={'ru'}
             theme={'dark'}
