@@ -1,124 +1,16 @@
-.registration_form {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 40px;
-    border-radius: 8px;
-    border: 1px solid rgba( 255, 255, 255, 0.18 );
-    background: rgba( 255, 255, 255, 0.15 );
-    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
-    backdrop-filter: blur( 2px );
-    -webkit-backdrop-filter: blur( 2px );
-    transition: box-shadow 0.3s ease-in-out;
+@keyframes fade-out {
+	0% {
+		color: var(--additional-color);
+		filter: blur(1px);
+	}
 
-    @keyframes fade-out {
-      0% {
-        color: var(--additional-color);
-        filter: blur(5px);
-      }
+	100% {
+		filter: blur(0px);
+		color: red;
+	}
+}
 
-      100% {
-        filter: blur(0px);
-        color: red;
-      }
-    }
-
-    .error {
-      animation: fade-out 0.5s;
-      color: red;
-    }
-
-    h1 {
-      weight: bold;
-      width: 100%;
-      text-align: center;
-      font-size: 30px;
-    }
-    p {
-      margin-bottom: 10px;
-    }
-    .description {
-      weight: bold;
-      width: 100%;
-      text-align: center;
-      font-size: 15px;
-      margin-bottom: 25px;
-    }
-    &:hover {
-      box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
-    }
-  
-    .form_group {
-      margin-bottom: 30px;
-      position: relative;
-
-      img {
-        position: absolute;
-        left: 12px;
-        bottom: 0%;
-        transform: translate(0,-50%);
-      }
-
-      .forgot_password {
-        position: absolute;
-        right: 12px;
-        bottom: 0%;
-        transform: translate(0, -50%);
-      }
-
-      label {
-        position: absolute;
-        left: 49px;
-        top: 50%;
-        transform: translate(0,-50%);
-        font-weight: bold;
-        opacity: 1;
-        transition-duration: 0.2s;
-      }
-  
-      input {
-        border: 1px solid rgba( 255, 255, 255, 0.18 );
-        background: rgba( 255, 255, 255, 0.15 );
-        box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
-        backdrop-filter: blur( 2px );
-        -webkit-backdrop-filter: blur( 2px );
-        width: 100%;
-        padding: 12px;
-        padding-left: 49px;
-        border-radius: 4px;
-        transition-duration: 0.2s;
-  
-        &:focus, &:valid {
-          transition-duration:0.2s;
-          margin-top:20px;
-           ~ label {
-            left: 12px; 
-            top: 0;
-            transition-duration: 0.2s;
-           }
-        }
-      }
-    }
-  
-
-    button {
-      background-color: var(--primary-color);
-      color: #fff;
-      padding: 12px 24px;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      transition: background-color 0.3s ease-in-out;
-  
-      &:hover {
-        background-color: var(--secondary-color);
-      }
-    }
-  }
- @media (max-width: 786px) {
-  .registration_form {
-    background: linear-gradient(90deg, #1e1e1e, #121212);
-    opacity: 1;
-    backdrop-filter: none;
-    box-shadow: none
-  }}
-  
+.error {
+	animation: fade-out 0.5s;
+	color: red;
+}

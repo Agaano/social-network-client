@@ -1,42 +1,64 @@
-'use client';
+'use client'
 import { IChat, IMessage } from '@/app/(app)/(auth)/messanger/page'
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { BiSend } from 'react-icons/bi'
+import Message from './message'
 
-export default ({opened, style, activeChat, chats, sendMessage} : {opened: boolean, style: any, activeChat: number | undefined, chats: IChat[] | undefined, sendMessage: any}) => {
-	const [message, setMessage] = useState('');
-	const handleSubmit = (e:any) => {
-		e.preventDefault();
-		setMessage('');
-		sendMessage(message);
+export default ({
+	opened,
+	style,
+	chat,
+	chats,
+	sendMessage,
+	getOlderMessages,
+}: {
+	opened: boolean
+	style: any
+	chat: IChat | undefined
+	chats: IChat[] | undefined
+	sendMessage: any
+	getOlderMessages: any
+}) => {
+	const [message, setMessage] = useState('')
+	const handleSubmit = (e: any) => {
+		e.preventDefault()
+		setMessage('')
+		sendMessage(message)
 	}
-	
-	if (!activeChat) {
-		return (
-			<main>
-				<section>
-					Выберите чат для того что бы начать общаться
-				</section>
-				<form>
-					<input/>
-					<button>
-							<BiSend/>
-					</button>
-				</form>
-			</main>
-		)
-	}
+	const sectionRef = useRef<HTMLUListElement>(null)
+	const [scrollHeight, setScrollHeight] = useState<number | undefined>()
 
-	if (!chats) {
+	useEffect(() => {
+		if (!chat || !sectionRef) return
+		sectionRef.current?.scroll({ top: sectionRef.current?.scrollHeight })
+		sectionRef.current?.addEventListener('scroll', () => {
+			if (sectionRef.current?.scrollTop === 0) {
+				getOlderMessages(chat.id, chat.messages[0].id)
+				setScrollHeight(sectionRef.current?.scrollHeight)
+				sectionRef.current?.removeEventListener('scroll', () => {})
+			}
+		})
+		return () => {
+			sectionRef.current?.removeEventListener('scroll', () => {})
+		}
+	}, [chat])
+
+	useEffect(() => {
+		if (!chats || !chat) return
+		if (!scrollHeight) return
+		sectionRef.current?.scroll({
+			top: sectionRef.current?.scrollHeight - scrollHeight,
+		})
+	}, [chats])
+
+	if (!chat) {
 		return (
-			<main>
-				<section>
-					Загрузка
-				</section>
+			<main className={!opened && style.closed}>
+				<section>Загрузка</section>
 				<form>
-					<input/>
+					<input />
 					<button>
-							<BiSend/>
+						<BiSend />
 					</button>
 				</form>
 			</main>
@@ -44,22 +66,25 @@ export default ({opened, style, activeChat, chats, sendMessage} : {opened: boole
 	}
 
 	return (
-		<main className = {!opened && style.closed}>
-			<section>
+		<main className={!opened && style.closed}>
+			<div className={style.header}>{chat.name}</div>
+			<section ref={sectionRef}>
 				<ul>
-					{activeChat && chats.length > 0 && chats.find((obj:IChat) => obj.id === activeChat)?.messages.map((message:IMessage) => {
-						return (
-							<li>
-								{message.user?.username}:{message.content}
-							</li>
-							)
+					{chat &&
+						chat.messages.map((message: IMessage) => {
+							return <Message key={message.id} message={message} />
 						})}
 				</ul>
 			</section>
 			<form onSubmit={handleSubmit}>
-				<input value = {message} onChange = {(e) => {setMessage(e.target.value)}}/>
+				<input
+					value={message}
+					onChange={e => {
+						setMessage(e.target.value)
+					}}
+				/>
 				<button>
-						<BiSend/>
+					<BiSend />
 				</button>
 			</form>
 		</main>

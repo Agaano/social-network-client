@@ -1,0 +1,90 @@
+.registration_form {
+	max-width: 600px;
+	margin: 0 auto;
+	padding: 40px;
+	border-radius: 8px;
+	border: 1px solid rgba(255, 255, 255, 0.18);
+	background: rgba(255, 255, 255, 0.15);
+	box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+	backdrop-filter: blur(2px);
+	-webkit-backdrop-filter: blur(2px);
+	transition: box-shadow 0.3s ease-in-out;
+
+	h1 {
+		font-weight: bold;
+		width: 100%;
+		text-align: left;
+		font-size: 40px;
+	}
+
+	p {
+		width: 100%;
+		text-align: left;
+	}
+
+	hr {
+		margin-block: 35px;
+		border-image: linear-gradient(
+				90deg,
+				transparent 0%,
+				#a6bfff 50%,
+				transparent 100%
+			)
+			1;
+	}
+	&:valid {
+		button {
+			cursor: pointer;
+			background-color: #6a00ff7d;
+		}
+	}
+
+	&:not(:valid) {
+		button {
+			cursor: default;
+		}
+	}
+
+	button {
+		width: 100%;
+		background: #ffffff11;
+		border: 1px solid rgba(255, 255, 255, 0.18);
+		box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+		padding: 12px 24px;
+		border-radius: 4px;
+		cursor: pointer;
+		margin-top: 15px;
+		transition: background-color 0.2s ease-in-out;
+	}
+
+	.description {
+		width: 100%;
+		text-align: left;
+		font-size: 15px;
+		margin-bottom: 30px;
+	}
+
+	@keyframes fade-out {
+		0% {
+			color: var(--additional-color);
+			filter: blur(5px);
+		}
+
+		100% {
+			filter: blur(0px);
+			color: red;
+		}
+	}
+}
+@media (max-width: 786px) {
+	.registration_form {
+		background: linear-gradient(90deg, #1e1e1e, #121212);
+		opacity: 1;
+		font-weight: lighter;
+		backdrop-filter: none;
+		box-shadow: none;
+		h1 {
+			font-size: 30px;
+		}
+	}
+}
