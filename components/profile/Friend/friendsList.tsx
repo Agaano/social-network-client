@@ -32,17 +32,18 @@ export default ({
 	if (loading) {
 		return (
 			<ul>
-				<h2>Загрузка</h2>
+				<h2 key={'-1'}>Загрузка</h2>
 			</ul>
 		)
 	}
 
 	return (
 		<ul>
-			<h2>Список друзей</h2>
+			<h2 key={'-1'}>Список друзей</h2>
 			{friends.map((friend: any) => {
 				return (
 					<FriendComponent
+						key={friend.id}
 						styles={styles}
 						friend={friend}
 						RefreshFriendship={setRefreshFriendship}

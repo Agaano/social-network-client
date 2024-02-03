@@ -28,7 +28,7 @@ const authSlice = createSlice({
 			state.user = action.payload
 		},
 		logout: state => {
-			Cookies.remove('_tka')
+			Cookies.remove('token')
 			state.isAuthenticated = false
 			state.user = null
 		},

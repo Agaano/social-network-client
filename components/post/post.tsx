@@ -8,6 +8,7 @@ import { IconContext } from 'react-icons'
 import { FaRegTrashCan } from 'react-icons/fa6'
 import { FcLike, FcLikePlaceholder } from 'react-icons/fc'
 import { useSelector } from 'react-redux'
+import Avatar from '../avatar'
 import { PostPlaceholder } from '../placeholder/profile/placeholder'
 import styles from './post.module.scss'
 
@@ -17,8 +18,8 @@ export default ({
 	hasDelete = false,
 }: {
 	id: number | string
-	RefreshPosts: any | null
-	hasDelete: boolean
+	RefreshPosts?: any | null
+	hasDelete?: boolean
 }) => {
 	const serverUrl = process.env.NEXT_PUBLIC_SERVER_URL
 	const [deleteIsLoading, setDeleteIsLoading] = useState(false)
@@ -110,10 +111,7 @@ export default ({
 		<li key={post.id} className={styles.post}>
 			{author && (
 				<div className={styles.profile_block}>
-					<img
-						className='avatar'
-						src={!author.avatar ? 'no_avatar.png' : serverUrl + author.avatar}
-					/>
+					<Avatar src={author.avatar} width={30} height={30} />
 					<h3>
 						<Link href={'/profile/' + author.link}>{author.username}</Link>
 					</h3>

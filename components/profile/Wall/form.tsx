@@ -78,21 +78,11 @@ export default ({ styles }: { styles: any }) => {
 
 	return (
 		<form className={styles.createPost} onSubmit={handleSubmitPost}>
-			<input
-				type='text'
-				name='title'
-				placeholder='Заголовок'
-				value={newPost.title}
-				onChange={(e: any) => {
-					setNewPost((prev: any) => {
-						return { ...prev, title: e.target.value }
-					})
-				}}
-			/>
 			<div
 				style={{
 					display: open ? 'block' : 'none',
 				}}
+				className={styles.emojiPicker}
 			>
 				<EmojiPicker
 					locale='ru'
@@ -107,14 +97,14 @@ export default ({ styles }: { styles: any }) => {
 				value={newPost.text}
 				name='text'
 				onChange={handleInputChange}
-				placeholder='Описание'
+				placeholder='Содержание'
 				autoComplete='off'
 				id='messageInput'
 			/>
+			{!newPost.loading && <button type='submit'>Отправить</button>}
 			<button type='button' onClick={() => setOpen(!open)}>
 				{open ? 'Скрыть' : <BsEmojiWink />}
 			</button>{' '}
-			{!newPost.loading && <button type='submit'>Отправить</button>}
 		</form>
 	)
 }

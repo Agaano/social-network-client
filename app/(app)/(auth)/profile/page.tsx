@@ -3,6 +3,7 @@ import Form from '@/components/profile/Wall/form'
 import PostsList from '@/components/profile/Wall/postsList'
 import Wall from '@/components/profile/Wall/wall'
 import { cookies } from 'next/headers'
+import { redirect } from 'next/navigation'
 import styles from './profile.module.scss'
 
 export interface IPost {
@@ -15,9 +16,7 @@ export interface IPost {
 const ProfilePage = () => {
 	const token = cookies().get('token')?.value
 	if (!token) {
-		return (
-			<div className='flex fixed w-full h-full justify-center align-baseline'></div>
-		)
+		redirect('/auth')
 	}
 
 	return (

@@ -1,36 +1,34 @@
 'use client'
 import validateToken from '@/lib/auth/validateToken'
+import useSocket from '@/lib/hooks/useSocket'
 import { IUser, login } from '@/lib/store/authSlice'
+import { RootState } from '@/lib/store/store'
+import cookies from 'js-cookie'
 import { useRouter } from 'next/navigation'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 export default function RootLayout({
 	children,
 }: {
 	children: React.ReactNode
 }) {
-	const serverUrl = process.env.NEXT_PUBLIC_SERVER_URL
 	const dispatch = useDispatch()
 	const router = useRouter()
-	const [textOpacity, setTextOpacity] = useState(0)
-	const { refresh } = useSelector((state: any) => state.auth)
-
-	// useEffect(() => {
-	// 	setTextOpacity(1)
-	// 	const hideTextTimeout = setTimeout(() => {
-	// 		setTextOpacity(0)
-	// 	}, 2000)
-
-	// 	return () => {
-	// 		clearTimeout(hideTextTimeout)
-	// 	}
-	// }, [])
+	const messageToast = (message: string, username?: string) =>
+		toast(
+			username +
+				': ' +
+				(message.length > 15 ? `${message.slice(0, 14)}...` : message)
+		)
+	const { refresh, user } = useSelector((state: RootState) => state.auth)
+	const { socket } = useSocket()
 
 	useEffect(() => {
 		const handler = async () => {
 			const user: undefined | IUser = await validateToken()
-			console.log(user)
 			if (!user) {
 				router.push('/auth')
 				return
@@ -40,6 +38,21 @@ export default function RootLayout({
 
 		handler()
 	}, [refresh])
+
+	useEffect(() => {
+		if (!socket || !user) return
+		socket.on('connection', onConnection)
+	}, [socket, user])
+
+	const onConnection = async () => {
+		if (!socket || !user) return
+		const token = cookies.get('token')
+		socket.emit('joinAllRooms', token)
+		socket.on('message', (message: any) => {
+			if (!message.content || !message.user) return
+			messageToast(message.content, message.user?.username)
+		})
+	}
 
 	return (
 		<div>
@@ -54,6 +67,7 @@ export default function RootLayout({
 				Добро пожаловать на <span style={{ color: 'blue' }}>EtruxS</span>!
 			</h1> */}
 			{children}
+			<ToastContainer theme='dark' position='bottom-left' />
 		</div>
 	)
 }

@@ -9,7 +9,6 @@ export default async (): Promise<undefined | IUser> => {
 		.post(`${serverUrl}/auth/validate`, { token })
 		.then(response => {
 			const { token, user } = response.data
-			console.log(user)
 			Cookies.set('token', token, { expires: 1 })
 			return user
 		})

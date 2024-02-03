@@ -1,11 +1,21 @@
-import { configureStore } from '@reduxjs/toolkit'
+import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import authReducer from './authSlice'
+import socketReducer from './socketSlice'
+
+const rootReducer = combineReducers({
+	auth: authReducer,
+	socket: socketReducer,
+})
+export type RootState = ReturnType<typeof rootReducer>
 
 const store = configureStore({
-  reducer: {
-    auth: authReducer,
-  },
-  devTools: true
-});
+	reducer: rootReducer,
+	devTools: true,
+	middleware: getDefaultMiddleware => {
+		return getDefaultMiddleware({
+			serializableCheck: false,
+		})
+	},
+})
 
-export default store;
+export default store

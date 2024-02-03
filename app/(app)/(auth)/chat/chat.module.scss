@@ -1,0 +1,137 @@
+.main {
+	background: linear-gradient(90deg, #1e1e1e, #121212);
+	color: #ffffff;
+	padding: 30px;
+	border-radius: 20px;
+	box-shadow: 0 0 30px rgba(0, 0, 0, 0.6);
+	max-width: 800px;
+	margin: 0 auto;
+	margin-bottom: 15px;
+	text-align: center;
+
+	h1 {
+		text-align: left;
+		font-size: 40px;
+		font-weight: bold;
+	}
+
+	ul {
+		margin-top: 15px;
+		display: flex;
+		flex-direction: column;
+		row-gap: 10px;
+	}
+
+	li .link {
+		display: flex;
+		column-gap: 5px;
+		flex-direction: row;
+		align-items: center;
+		transition: background-color 0.2s ease-in-out;
+		border-radius: 18px;
+
+		&:hover {
+			background-color: rgba(255, 255, 255, 0.1);
+		}
+	}
+}
+
+.chat {
+	background: linear-gradient(90deg, #1e1e1e, #121212);
+	color: #ffffff;
+	padding: 30px;
+	box-shadow: 0 0 30px rgba(0, 0, 0, 0.6);
+	max-width: 800px;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 50%;
+	transform: translateX(-50%);
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+	z-index: 1501;
+
+	.chat_info {
+		width: 100%;
+		height: 10%;
+		display: flex;
+		justify-content: space-between;
+		padding-inline: 15px;
+		align-items: flex-start;
+		border-bottom: 1px solid rgba(white, 0.25);
+	}
+
+	.messages {
+		width: 100%;
+		height: 80%;
+		overflow-y: auto;
+		display: flex;
+		flex-direction: column;
+		row-gap: 10px;
+		padding-inline: 10px;
+		padding-top: 10px;
+		&::-webkit-scrollbar {
+			width: 3px;
+			background-color: #161527;
+		}
+
+		&::-webkit-scrollbar-thumb {
+			width: 3px;
+			background-color: #8f89ff;
+		}
+		li {
+			padding-inline: 15px;
+			padding-block: 5px;
+			width: fit-content;
+			max-width: 70%;
+			overflow-wrap: break-word;
+			border-radius: 5px;
+			background-color: #8f89ff;
+			&.mine {
+				align-self: flex-end;
+				text-align: left;
+				.username {
+					text-align: right;
+				}
+			}
+			.username {
+				display: block;
+				font-size: 10px;
+			}
+		}
+	}
+	.input_form {
+		width: 100%;
+		height: 10%;
+		display: flex;
+		align-items: center;
+
+		input {
+			height: 50px;
+			background-color: #161527;
+			width: 100%;
+			outline: none;
+			padding-inline: 15px;
+			border: 1px solid white;
+		}
+
+		button {
+			padding: 5px;
+			border: 1px solid white;
+			border-left: none;
+			height: 50px;
+		}
+	}
+}
+
+@media (max-width: 400px) {
+	.chat {
+		padding: 0px;
+		.chat_info {
+			padding-inline: 10px;
+			align-items: center;
+		}
+	}
+}

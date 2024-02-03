@@ -1,9 +1,11 @@
 'use client'
+import Avatar from '@/components/avatar'
 import { ProfilePlaceholder } from '@/components/placeholder/profile/placeholder'
 import FriendsTab from '@/components/profile/friendsTab'
 import ModalAvatar from '@/components/profile/modalAvatar'
 import Settings from '@/components/profile/settings'
 import { logout, refresh } from '@/lib/store/authSlice'
+import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { IconContext } from 'react-icons'
 import { AiOutlineSetting } from 'react-icons/ai'
@@ -20,24 +22,23 @@ export function ProfileInfo() {
 	const [settingsOpen, setSettingsOpen] = useState(false)
 	const [friendsListOpen, setFriendsListOpen] = useState(false)
 	const dispatch = useDispatch()
+	const router = useRouter()
 
 	const handleLogout = () => {
 		dispatch(logout())
 		dispatch(refresh())
+		router.push('/push')
 	}
 
-	if (!user) {
-		return <ProfilePlaceholder />
-	}
+	if (!user) return <ProfilePlaceholder />
 
 	return (
 		<>
 			<div className={styles.profile}>
 				<div className={styles.profileHeader}>
-					<img
-						src={serverUrl + user.avatar || 'no_avatar.png'}
+					<Avatar
+						src={user.avatar}
 						alt={user.username}
-						className='avatar'
 						onClick={e => setModalOpen(true)}
 					/>
 					<div className={styles.headerText}>
@@ -80,46 +81,46 @@ export function ProfileInfo() {
 							Website
 						</a>
 					)}
-					<div className={styles.buttons}>
-						<button
-							onClick={() => {
-								if (settingsOpen) {
-									setSettingsOpen(false)
-								}
-								setFriendsListOpen(prev => !prev)
-							}}
-						>
-							<IconContext.Provider value={{ size: '30px' }}>
-								<LiaUserFriendsSolid />
-							</IconContext.Provider>
-						</button>
-						<button
-							onClick={() => {
-								if (friendsListOpen) {
-									setFriendsListOpen(prev => !prev)
-								}
-								setSettingsOpen(prev => !prev)
-							}}
-						>
-							<IconContext.Provider value={{ size: '30px' }}>
-								<AiOutlineSetting />
-							</IconContext.Provider>
-						</button>
-						<button onClick={handleLogout}>
-							<IconContext.Provider value={{ size: '30px' }}>
-								<CiLogout onClick={handleLogout} />
-							</IconContext.Provider>
-						</button>
-					</div>
 				</div>
-				<ModalAvatar
-					isOpen={modalOpen}
-					reloadPage={() => {}}
-					onRequestClose={() => {
-						setModalOpen(false)
-					}}
-				/>
+				<div className={styles.buttons}>
+					<button
+						onClick={() => {
+							if (settingsOpen) {
+								setSettingsOpen(false)
+							}
+							setFriendsListOpen(prev => !prev)
+						}}
+					>
+						<IconContext.Provider value={{ size: '30px' }}>
+							<LiaUserFriendsSolid />
+						</IconContext.Provider>
+					</button>
+					<button
+						onClick={() => {
+							if (friendsListOpen) {
+								setFriendsListOpen(prev => !prev)
+							}
+							setSettingsOpen(prev => !prev)
+						}}
+					>
+						<IconContext.Provider value={{ size: '30px' }}>
+							<AiOutlineSetting />
+						</IconContext.Provider>
+					</button>
+					<button onClick={handleLogout}>
+						<IconContext.Provider value={{ size: '30px' }}>
+							<CiLogout onClick={handleLogout} />
+						</IconContext.Provider>
+					</button>
+				</div>
 			</div>
+			<ModalAvatar
+				isOpen={modalOpen}
+				reloadPage={() => {}}
+				onRequestClose={() => {
+					setModalOpen(false)
+				}}
+			/>
 			<FriendsTab open={friendsListOpen} />
 			<Settings open={settingsOpen} />
 		</>
