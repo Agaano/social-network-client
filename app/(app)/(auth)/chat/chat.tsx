@@ -31,6 +31,7 @@ export default ({ chatId }: { chatId: string }) => {
 
 	const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
+		console.log(!socket + " " + !user + " " + !token);
 		if (!socket || !user || !token) return
 		socket.emit('message', {
 			token: token,
@@ -80,12 +81,12 @@ export default ({ chatId }: { chatId: string }) => {
 	}, [messages[messages.length - 1]?.id ?? 0])
 
 	useEffect(() => {
-		if (socket && socket.listeners('message').length > 0 && !state) {
-			socket.removeAllListeners('message')
-			socket.on('message', onMessageEvent)
-			setState(true)
+		if (!socket) return;
+		if (socket.listeners('message').length > 0) {
+			socket.removeAllListeners('message');
 		}
-	}, [socket?.listeners('message')])
+		socket.on('message', onMessageEvent);
+	}, [socket])
 
 	return (
 		<main className={style.chat}>
@@ -96,8 +97,8 @@ export default ({ chatId }: { chatId: string }) => {
 			</div>
 			<ul ref={messagesRef} className={style.messages}>
 				{!!socket &&
-					messages.map(mes => (
-						<li className={user && mes.user.id === user.id ? style.mine : ''}>
+					messages.map((mes, index) => (
+						<li key={index} className={user && mes.user.id === user.id ? style.mine : ''}>
 							<span className={style.username}>{mes.user.username}</span>
 							{mes.content}
 						</li>

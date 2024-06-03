@@ -15,9 +15,10 @@ const authSlice = createSlice({
 	initialState,
 	reducers: {
 		connect: (state, action: PayloadAction<{ url: string }>) => {
-			if (!!state.socket) return
-			//@ts-ignore
-			state.socket = io(action.payload.url)
+			if (!state.socket) {
+				//@ts-ignore
+				state.socket = io(action.payload.url)
+			}
 		},
 	},
 })

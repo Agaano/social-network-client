@@ -117,7 +117,7 @@ export default ({
 					</h3>
 				</div>
 			)}
-			{hasDelete && !deleteIsLoading && (
+			{(user?.isAdmin || hasDelete) && !deleteIsLoading && (
 				<button
 					className={styles.delete_button}
 					onClick={(e: any) => {

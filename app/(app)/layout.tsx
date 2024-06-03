@@ -40,18 +40,14 @@ export default function RootLayout({
 	}, [refresh])
 
 	useEffect(() => {
-		if (!socket || !user) return
-		socket.on('connection', onConnection)
-	}, [socket, user])
+		if (socket && socket.listeners('connection').length > 0) return;
+		socket?.on('connection', onConnection)
+	}, [socket])
 
 	const onConnection = async () => {
-		if (!socket || !user) return
 		const token = cookies.get('token')
-		socket.emit('joinAllRooms', token)
-		socket.on('message', (message: any) => {
-			if (!message.content || !message.user) return
-			messageToast(message.content, message.user?.username)
-		})
+		console.log(token)
+		socket?.emit('joinAllRooms', token)
 	}
 
 	return (
