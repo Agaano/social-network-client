@@ -6,6 +6,7 @@ export interface IUser {
 	email: string
 	username: string
 	avatar: string
+	isAdmin: boolean
 	service: object
 }
 
