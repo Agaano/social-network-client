@@ -39,7 +39,9 @@ const LoginForm = () => {
 				}
 			})
 			.catch(err => {
-				if (err.response?.status < 500)
+				if (err.response?.status === 451) {
+					setMessage('Ваш аккаунт был заблокирован')
+				} else if (err.response?.status < 500)
 					setMessage('Неправильное имя пользователя или пароль')
 				else {
 					setMessage('Произошла ошибка... Повторите попытку позже')
@@ -57,13 +59,21 @@ const LoginForm = () => {
 			title={'Войти'}
 			description='Присоединяйтесь к нам!'
 			additionalEl={
-				<p className='my-5'>
-					Ещё нет аккаунта?
-					<b>
-						{' '}
-						<Link href='/register'>Зарегистрироваться</Link>
-					</b>
-				</p>
+				<>
+					<p className='my-5'>
+						Ещё нет аккаунта?
+						<b>
+							{' '}
+							<Link href='/register'>Зарегистрироваться</Link>
+						</b>
+					</p>
+					<p className='my-5'>
+						<b>
+							{' '}
+							<Link href='/forgotpassword'>Забыли пароль?</Link>
+						</b>
+					</p>
+				</>
 			}
 		>
 			{message && <p className={style.error}>{message}</p>}

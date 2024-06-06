@@ -1,10 +1,11 @@
 import axios from 'axios'
 import Cookies from 'js-cookie'
 import { IUser } from '../store/authSlice'
+
 export default async (): Promise<undefined | IUser> => {
 	const token = Cookies.get('token')
 	const serverUrl = process.env.NEXT_PUBLIC_SERVER_URL
-	if (!token) return
+	if (!token) return;
 	return axios
 		.post(`${serverUrl}/auth/validate`, { token })
 		.then(response => {
@@ -14,6 +15,7 @@ export default async (): Promise<undefined | IUser> => {
 		})
 		.catch(err => {
 			console.log(err)
-			return
+			if (err.response?.status === 451) return 451
+			return;
 		})
 }

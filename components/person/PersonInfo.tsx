@@ -2,6 +2,7 @@ import styles from '@/components/profile/ProfileInfo/profile.module.scss'
 import { FaGithub, FaGlobe, FaLinkedin } from 'react-icons/fa'
 import Avatar from '../avatar'
 import FriendController from './FriendController'
+import BanController from './BanController'
 
 export default ({ user }: { user: any }) => {
 	const serverUrl = process.env.NEXT_PUBLIC_SERVER_URL
@@ -46,13 +47,14 @@ export default ({ user }: { user: any }) => {
 						target='_blank'
 						rel='noopener noreferrer'
 					>
-						<FaGlobe className={styles.icon} />
+						<FaGlobe className={styles.icon}/>
 						Website
 					</a>
 				)}
 			</div>
 			<div className={'my-5'}>
-				<FriendController id={user.id} />
+				<FriendController id={user.id}/>
+				<BanController id={user.id}/>
 			</div>
 		</div>
 	)

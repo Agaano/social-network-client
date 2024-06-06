@@ -47,7 +47,7 @@ export default ({
 						key={friend.id}
 						styles={styles}
 						friend={friend}
-						RefreshFriendship={RefreshFriendship}
+						RefreshFriendship={setRefreshFriendship}
 					/>
 				)
 			})}

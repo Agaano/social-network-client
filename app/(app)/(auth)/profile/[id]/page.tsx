@@ -4,9 +4,10 @@ import axios from 'axios'
 import { Metadata, ResolvingMetadata } from 'next'
 import { cookies } from 'next/headers'
 import Link from 'next/link'
-import { redirect } from 'next/navigation'
+import { redirect, useSelectedLayoutSegment } from 'next/navigation'
 import PersonInfo from '../../../../../components/person/PersonInfo'
 import styles from '../profile.module.scss'
+import BanController from '@/components/person/BanController'
 
 type Props = {
 	params: { id: string }
@@ -43,6 +44,18 @@ export default async ({ params: { id } }: Props) => {
 	}
 
 	const posts = (await axios.get(`${serverUrl}/posts/findOne/${user.id}`)).data
+
+	if (user?.service?.['blocked']) {
+		return (
+			<main className={'flex flex-col w-full h-5 justify-center items-center '}>
+				Этот пользователь был заблокирован
+				<BanController id = {user.id}/>
+				<Link className='text-purple-300' href='/'>
+					Вернуться на главную
+				</Link>
+			</main>
+		)
+	}
 
 	if (!user?.service?.confirmed) {
 		return (

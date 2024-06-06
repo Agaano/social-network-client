@@ -66,9 +66,15 @@ export default function RegistrationForm() {
 		const response = await axios.post(`${serverUrl}/auth/signup`, {
 			...formData,
 			confirmPassword: undefined,
-		})
+		}, { validateStatus: (status) => status < 500})
 		if (response.status >= 200 && response.status < 300) {
 			rout.push(`/confirm?id=${response.data.id}&email=${response.data.email}`)
+		}
+		if (response.status === 409) {
+			setServiceFormData(prev => ({
+				...prev,
+				email: 'Пользователь с такой почтой уже существует!'
+			}))
 		}
 		setLoading(false)
 	}

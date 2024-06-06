@@ -27,7 +27,7 @@ export function ProfileInfo() {
 	const handleLogout = () => {
 		dispatch(logout())
 		dispatch(refresh())
-		router.push('/push')
+		router.push('/auth')
 	}
 
 	if (!user) return <ProfilePlaceholder />
