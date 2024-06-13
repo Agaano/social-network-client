@@ -109,7 +109,7 @@ export default ({ chatId }: { chatId: string }) => {
       </ul>
       <form className={style.input_form} onSubmit={handleSubmit}>
         <input value={message} onChange={(e) => setMessage(e.target.value)} />
-        <button type="submit">Отправить</button>
+        <button type="submit">Send</button>
       </form>
     </main>
   );

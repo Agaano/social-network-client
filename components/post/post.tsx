@@ -130,6 +130,7 @@ export default ({
 			)}
 			<h2>{post?.title}</h2>
 			<p>{post?.text}</p>
+			<img className={styles.post_image} src = {serverUrl + post?.image}/>
 			{likesIsLoading > 0 ? (
 				<div className={styles.like}>
 					<FcLike /> {likes.length + 1}
