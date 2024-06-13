@@ -58,14 +58,14 @@ export default ({
 						handleAddPerson(friend.id)
 					}}
 				>
-					<BsFillPersonPlusFill />
+					<BsFillPersonPlusFill style={{ width: '30px', height: '30px' }}  />
 				</button>
 				<button
 					onClick={() => {
 						handleDeletePerson(friend.id)
 					}}
 				>
-					<BsFillPersonXFill />
+					<BsFillPersonXFill style={{ width: '30px', height: '30px' }}  />
 				</button>
 			</div>
 		</li>

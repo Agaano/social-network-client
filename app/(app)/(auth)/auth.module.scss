@@ -1,16 +1,17 @@
 @keyframes fade-out {
-	0% {
-		color: var(--additional-color);
-		filter: blur(1px);
-	}
+  0% {
+    color: var(--additional-color);
+    filter: blur(1px);
+  }
 
-	100% {
-		filter: blur(0px);
-		color: red;
-	}
+  100% {
+    filter: blur(0px);
+    color: red;
+  }
 }
 
 .error {
-	animation: fade-out 0.5s;
-	color: red;
+  font-size: 20px;
+  animation: fade-out 0.5s;
+  color: rgb(255, 0, 0);
 }
