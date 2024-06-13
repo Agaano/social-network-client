@@ -13,6 +13,7 @@ export default ({ styles }: { styles: any }) => {
 	const [isLoading, setIsLoading] = useState(true)
 	const router = useRouter()
 	const [open, setOpen] = useState(false)
+	const [imageLink, setImageLink] = useState('');
 
 	const [newPost, setNewPost] = useState({
 		title: '',
@@ -35,6 +36,7 @@ export default ({ styles }: { styles: any }) => {
 			token: token,
 			title: newPost.title,
 			text: newPost.text,
+			image: imageLink,
 		})
 		if (response.status >= 200 && response.status < 400) {
 			setNewPost({ title: '', text: '', loading: false })
@@ -76,6 +78,19 @@ export default ({ styles }: { styles: any }) => {
 		}
 	}
 
+	const handleSubmitFileUpload = async (e: any) => {
+		const file = e.target.files[0];
+		if (!file) return;
+		if (file.size > 1000 * 1000 * 5) return;
+		const formData = new FormData();
+		formData.append('file', file);
+		const response = await axios.post(`${serverUrl}/posts/upload/photo`, formData);
+		if (response.status >= 200 && response.status < 300) {
+			const data = response.data;
+			setImageLink(data.filepath);
+		}
+	}
+
 	return (
 		<form className={styles.createPost} onSubmit={handleSubmitPost}>
 			<div
@@ -105,6 +120,11 @@ export default ({ styles }: { styles: any }) => {
 			<button type='button' onClick={() => setOpen(!open)}>
 				{open ? 'Скрыть' : <BsEmojiWink />}
 			</button>{' '}
+			{imageLink.length > 0 ?
+			<></>
+			:
+			<input type='file' onChange={handleSubmitFileUpload}/>
+			}
 		</form>
 	)
 }

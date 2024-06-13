@@ -30,7 +30,6 @@ export default () => {
         const response = await axios.post(serverUrl + '/auth/forgotPassword', {email}, {validateStatus: (s) => s < 500})
         if (response.status < 200 || response.status >= 300) {
             setMessage('Что то пошло не так, попробуйте снова')
-            alert('ASDFKLD;ASKD;LAS')
             return;
         }
         const code = response.data;

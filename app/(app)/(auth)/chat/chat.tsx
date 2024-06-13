@@ -94,6 +94,7 @@ export default ({ chatId }: { chatId: string }) => {
 				<Link href='/chat'>
 					<img src='icons/back.svg' width={50} />
 				</Link>
+				<button onClick = {() => alert(chatId)}>Получить идентификатор</button>
 			</div>
 			<ul ref={messagesRef} className={style.messages}>
 				{!!socket &&

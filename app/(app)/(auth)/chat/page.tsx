@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { redirect } from 'next/navigation'
 import Chat from './chat'
 import styles from './chat.module.scss'
+import JoinChatForm from './joinChatForm'
 
 export default async ({
 	searchParams,
@@ -23,6 +24,7 @@ export default async ({
 			<main className={styles.main}>
 				<h1>Чаты</h1>
 				<div>
+					<JoinChatForm token= {token}/>
 					<ul>
 						{dialogues &&
 							dialogues.map((dialogue: any) => (

@@ -11,6 +11,7 @@ export interface IPost {
 	title: string
 	text: string
 	date: string
+	image: string
 }
 
 const ProfilePage = () => {
